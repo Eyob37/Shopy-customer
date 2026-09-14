@@ -1,0 +1,14 @@
+{
+  "name": "eyob-shopy-customer",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "firebase-admin": "14.3.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "overrides": {
+    "jose": "5.10.0"
+  }
+}

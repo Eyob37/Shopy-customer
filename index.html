@@ -1,1 +1,69 @@
-Hello customers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <title>Eyob shopy</title>
+
+    <script type="module">
+
+        import { initializeApp }
+            from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+        import {
+            getAuth,
+            onAuthStateChanged
+        }
+            from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTOwgfhvWtxwPLGFWlT0oY9W66en6wiBw",
+            authDomain: "eyob-shopy.firebaseapp.com",
+            databaseURL: "https://eyob-shopy-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "eyob-shopy",
+            storageBucket: "eyob-shopy.firebasestorage.app",
+            messagingSenderId: "122311284300",
+            appId: "1:122311284300:web:6ae0af663526863c2746e9",
+            measurementId: "G-QQWD28CWX1"
+        };
+
+
+        const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+        const auth = getAuth(app);
+
+
+  				onAuthStateChanged(auth, async user => {
+				    if (!user){
+				        window.location.replace("continue with Google.html");
+				        return;
+				    } 
+				
+				    localStorage.setItem("userId", user.uid);
+				
+				    const snapshot = await get(ref(db, `eyobShopy/users/${user.uid}`));
+				
+          const data = snapshot.val();
+				    if (snapshot.exists() && data?.name) {
+				        localStorage.setItem("IsInformationEntered", "true");
+				        window.location.replace("home.html");
+				    } else {
+				        localStorage.setItem("IsInformationEntered", "false");
+				        window.location.replace("insert information.html");
+				    }
+				});	
+
+    </script>
+
+</head>
+
+<body>
+
+    <p>Loading...</p>
+
+</body>
+</html>
