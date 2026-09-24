@@ -184,7 +184,8 @@ from:userId,
 to:"Eyob shopy",
 message:text,
 time:now,
-seen:false
+seen:false,
+edited: false
 });
 
 await set(ref(db,`eyobShopy/messages/${userId}/lastMessage`),{
